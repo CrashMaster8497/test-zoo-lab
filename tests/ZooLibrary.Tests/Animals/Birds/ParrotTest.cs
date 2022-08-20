@@ -99,7 +99,7 @@ namespace ZooLibrary.Tests.Animals.Birds
         private static IEnumerable<object[]> GenerateNotFriendlyAnimals()
         {
             yield return new object[] { new Lion() };
-            //yield return new object[] { new Penguin() };
+            yield return new object[] { new Penguin() };
             //yield return new object[] { new Snake() };
         }
     }

@@ -14,7 +14,7 @@ namespace ZooLibrary.Tests.Animals.Birds
         private static IEnumerable<object[]> GenerateBirds()
         {
             yield return new object[] { new Parrot() };
-            //yield return new object[] { new Penguin() };
+            yield return new object[] { new Penguin() };
         }
     }
 }
