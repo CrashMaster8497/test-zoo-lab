@@ -93,14 +93,14 @@ namespace ZooLibrary.Tests.Animals.Mammals
             yield return new object[] { new Bison() };
             yield return new object[] { new Elephant() };
             yield return new object[] { new Parrot() };
-            //yield return new object[] { new Turtle() };
+            yield return new object[] { new Turtle() };
         }
 
         private static IEnumerable<object[]> GenerateNotFriendlyAnimals()
         {
             yield return new object[] { new Lion() };
             yield return new object[] { new Penguin() };
-            //yield return new object[] { new Snake() };
+            yield return new object[] { new Snake() };
         }
     }
 }

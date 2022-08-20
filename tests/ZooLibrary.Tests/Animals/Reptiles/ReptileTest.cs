@@ -14,7 +14,7 @@ namespace ZooLibrary.Tests.Animals.Reptiles
         private static IEnumerable<object[]> GenerateReptiles()
         {
             yield return new object[] { new Snake() };
-            //yield return new object[] { new Turtle() };
+            yield return new object[] { new Turtle() };
         }
     }
 }

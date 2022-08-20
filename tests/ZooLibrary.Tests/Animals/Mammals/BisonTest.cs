@@ -99,8 +99,8 @@ namespace ZooLibrary.Tests.Animals.Mammals
             yield return new object[] { new Lion() };
             yield return new object[] { new Parrot() };
             yield return new object[] { new Penguin() };
-            //yield return new object[] { new Snake() };
-            //yield return new object[] { new Turtle() };
+            yield return new object[] { new Snake() };
+            yield return new object[] { new Turtle() };
         }
     }
 }
