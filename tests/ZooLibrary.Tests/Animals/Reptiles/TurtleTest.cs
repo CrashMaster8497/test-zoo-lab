@@ -2,6 +2,8 @@
 using ZooLibrary.Animals.Birds;
 using ZooLibrary.Animals.Mammals;
 using ZooLibrary.Animals.Reptiles;
+using ZooLibrary.Employees;
+using ZooLibrary.Medicine;
 
 namespace ZooLibrary.Tests.Animals.Reptiles
 {
@@ -47,7 +49,7 @@ namespace ZooLibrary.Tests.Animals.Reptiles
         {
             var turtle = new Turtle();
 
-            var zooKeeper = new Employees.ZooKeeper();
+            var zooKeeper = new ZooKeeper();
             zooKeeper.FeedAnimal(turtle);
 
             Assert.True(turtle.FeedTimes.Count == 1);
@@ -59,7 +61,7 @@ namespace ZooLibrary.Tests.Animals.Reptiles
         {
             var turtle = new Turtle();
 
-            var zooKeeper = new Employees.ZooKeeper();
+            var zooKeeper = new ZooKeeper();
             zooKeeper.FeedAnimal(turtle);
             zooKeeper.FeedAnimal(turtle);
             zooKeeper.FeedAnimal(turtle);
@@ -83,7 +85,7 @@ namespace ZooLibrary.Tests.Animals.Reptiles
         {
             var turtle = new Turtle() { IsSick = true };
 
-            turtle.Heal(new ZooLibrary.Medicine.Antibiotics());
+            turtle.Heal(new Antibiotics());
 
             Assert.False(turtle.IsSick);
         }

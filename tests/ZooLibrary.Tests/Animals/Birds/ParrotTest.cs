@@ -2,6 +2,8 @@
 using ZooLibrary.Animals.Birds;
 using ZooLibrary.Animals.Mammals;
 using ZooLibrary.Animals.Reptiles;
+using ZooLibrary.Employees;
+using ZooLibrary.Medicine;
 
 namespace ZooLibrary.Tests.Animals.Birds
 {
@@ -47,7 +49,7 @@ namespace ZooLibrary.Tests.Animals.Birds
         {
             var parrot = new Parrot();
 
-            var zooKeeper = new Employees.ZooKeeper();
+            var zooKeeper = new ZooKeeper();
             zooKeeper.FeedAnimal(parrot);
 
             Assert.True(parrot.FeedTimes.Count == 1);
@@ -59,7 +61,7 @@ namespace ZooLibrary.Tests.Animals.Birds
         {
             var parrot = new Parrot();
 
-            var zooKeeper = new Employees.ZooKeeper();
+            var zooKeeper = new ZooKeeper();
             zooKeeper.FeedAnimal(parrot);
             zooKeeper.FeedAnimal(parrot);
             zooKeeper.FeedAnimal(parrot);
@@ -83,7 +85,7 @@ namespace ZooLibrary.Tests.Animals.Birds
         {
             var parrot = new Parrot() { IsSick = true };
 
-            parrot.Heal(new ZooLibrary.Medicine.Antibiotics());
+            parrot.Heal(new Antibiotics());
 
             Assert.False(parrot.IsSick);
         }
