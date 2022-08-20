@@ -91,7 +91,7 @@ namespace ZooLibrary.Tests.Animals.Mammals
         private static IEnumerable<object[]> GenerateFriendlyAnimals()
         {
             yield return new object[] { new Bison() };
-            //yield return new object[] { new Elephant() };
+            yield return new object[] { new Elephant() };
         }
 
         private static IEnumerable<object[]> GenerateNotFriendlyAnimals()
