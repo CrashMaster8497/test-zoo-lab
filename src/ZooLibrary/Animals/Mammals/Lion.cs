@@ -2,7 +2,8 @@
 {
     public class Lion : Mammal
     {
-        private static readonly string[] _friendlyAnimals = new string[] {
+        private static readonly string[] _friendlyAnimals = new string[]
+        {
             "Lion"
         };
 
