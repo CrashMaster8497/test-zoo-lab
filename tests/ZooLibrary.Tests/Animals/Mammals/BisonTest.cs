@@ -15,7 +15,7 @@ namespace ZooLibrary.Tests.Animals.Mammals
             Assert.NotNull(bison);
             Assert.Equal(1000, bison.RequiredSpaceSqFt);
             Assert.NotNull(bison.FavoriteFood);
-            Assert.True(bison.FavoriteFood.Count() == 1);
+            Assert.True(bison.FavoriteFood.Length == 1);
             Assert.Contains("Grass", bison.FavoriteFood);
             Assert.NotNull(bison.FeedTimes);
             Assert.Empty(bison.FeedTimes);

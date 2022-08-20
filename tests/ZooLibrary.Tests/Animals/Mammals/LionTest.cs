@@ -15,7 +15,7 @@ namespace ZooLibrary.Tests.Animals.Mammals
             Assert.NotNull(lion);
             Assert.Equal(1000, lion.RequiredSpaceSqFt);
             Assert.NotNull(lion.FavoriteFood);
-            Assert.True(lion.FavoriteFood.Count() == 1);
+            Assert.True(lion.FavoriteFood.Length == 1);
             Assert.Contains("Meat", lion.FavoriteFood);
             Assert.NotNull(lion.FeedTimes);
             Assert.Empty(lion.FeedTimes);
