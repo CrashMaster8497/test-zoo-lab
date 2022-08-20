@@ -24,24 +24,23 @@ namespace ZooLibrary.Tests.Animals.Mammals
             Assert.False(lion.IsSick);
         }
 
-        [Fact]
-        public void ShouldBeFriendlyWith()
+        [Theory]
+        [MemberData(nameof(GenerateFriendlyAnimals))]
+        public void ShouldBeFriendlyWith(Animal animal)
         {
             var lion = new Lion();
 
-            Assert.True(lion.IsFriendlyWith(new Lion()));
+            Assert.True(lion.IsFriendlyWith(animal));
         }
 
-        /*
         [Theory]
-        [MemberData(nameof(GenerateAnimalsNotFriendlyWith))]
+        [MemberData(nameof(GenerateNotFriendlyAnimals))]
         public void ShouldNotBeFriendlyWith(Animal animal)
         {
             var lion = new Lion();
 
             Assert.False(lion.IsFriendlyWith(animal));
         }
-        */
 
         [Fact]
         public void ShouldBeAbleToFeed()
@@ -89,16 +88,19 @@ namespace ZooLibrary.Tests.Animals.Mammals
             Assert.False(lion.IsSick);
         }
 
-        /*
-        private static IEnumerable<object[]> GenerateAnimalsNotFriendlyWith()
+        private static IEnumerable<object[]> GenerateFriendlyAnimals()
+        {
+            yield return new object[] { new Lion() };
+        }
+
+        private static IEnumerable<object[]> GenerateNotFriendlyAnimals()
         {
             yield return new object[] { new Bison() };
-            yield return new object[] { new Elephant() };
-            yield return new object[] { new Parrot() };
-            yield return new object[] { new Penguin() };
-            yield return new object[] { new Snake() };
-            yield return new object[] { new Turtle() };
+            //yield return new object[] { new Elephant() };
+            //yield return new object[] { new Parrot() };
+            //yield return new object[] { new Penguin() };
+            //yield return new object[] { new Snake() };
+            //yield return new object[] { new Turtle() };
         }
-        */
     }
 }
