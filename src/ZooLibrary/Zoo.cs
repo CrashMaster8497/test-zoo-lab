@@ -96,5 +96,50 @@ namespace ZooLibrary
 
             Employees.Add(employee);
         }
+
+        public void FeedAnimals()
+        {
+            var animalDictionary = new Dictionary<string, List<Animal>>();
+            foreach (var enclosure in Enclosures)
+            {
+                foreach (var animal in enclosure.Animals)
+                {
+                    if (!animalDictionary.ContainsKey(animal.GetType().Name))
+                    {
+                        animalDictionary.Add(animal.GetType().Name, new List<Animal>());
+                    }
+                    animalDictionary[animal.GetType().Name].Add(animal);
+                }
+            }
+
+            var zooKeeperDictionary = new Dictionary<string, List<ZooKeeper>>();
+            foreach (var employee in Employees)
+            {
+                if (employee is ZooKeeper zooKeeper)
+                {
+                    foreach (var animalType in zooKeeper.AnimalExperiences)
+                    {
+                        if (!zooKeeperDictionary.ContainsKey(animalType))
+                        {
+                            zooKeeperDictionary.Add(animalType, new List<ZooKeeper>());
+                        }
+                        zooKeeperDictionary[animalType].Add(zooKeeper);
+                    }
+                }
+            }
+
+            var random = Random.Shared;
+            foreach (var animalType in animalDictionary.Keys)
+            {
+                foreach (var animal in animalDictionary[animalType])
+                {
+                    if (zooKeeperDictionary.ContainsKey(animalType))
+                    {
+                        var zooKeeper = zooKeeperDictionary[animalType][random.Next(zooKeeperDictionary[animalType].Count)];
+                        zooKeeper.FeedAnimal(animal);
+                    }
+                }
+            }
+        }
     }
 }

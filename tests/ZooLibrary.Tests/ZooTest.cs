@@ -83,6 +83,36 @@ namespace ZooLibrary.Tests
                 employee.FirstName, employee.LastName), exception.Message);
         }
 
+        [Theory]
+        [MemberData(nameof(GenerateZooForFeedAnimals))]
+        public void ShouldBeAbleToFeedAnimals(Zoo zoo)
+        {
+            zoo.FeedAnimals();
+
+            foreach (var enclosure in zoo.Enclosures)
+            {
+                foreach (var animal in enclosure.Animals)
+                {
+                    Assert.True(animal.FeedTimes.Count == 1);
+                }
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(GenerateZooForNotFeedAnimals))]
+        public void ShouldNotBeAbleToFeedAnimals(Zoo zoo)
+        {
+            zoo.FeedAnimals();
+
+            foreach (var enclosure in zoo.Enclosures)
+            {
+                foreach (var animal in enclosure.Animals)
+                {
+                    Assert.Empty(animal.FeedTimes);
+                }
+            }
+        }
+
         private static IEnumerable<object[]> GenerateZooWithAvailableEnclosure()
         {
             yield return new object[]
@@ -92,7 +122,7 @@ namespace ZooLibrary.Tests
                     Enclosures = new List<Enclosure>
                     {
                         new Enclosure { Name = "1", SquareFeet = 1000 },
-                        new Enclosure { Name = "2", SquareFeet = 999 },
+                        new Enclosure { Name = "2", SquareFeet = 999 }
                     }
                 },
                 new Bison()
@@ -302,6 +332,56 @@ namespace ZooLibrary.Tests
                     AnimalExperiences = { "Bison", "Parrot" }
                 }
             };
+        }
+
+        private static IEnumerable<object[]> GenerateZooForFeedAnimals()
+        {
+            yield return new object[] { new Zoo
+            {
+                Enclosures = new List<Enclosure>
+                {
+                    new Enclosure { Animals = new List<Animal>
+                    {
+                        new Bison(),
+                        new Elephant()
+                    } },
+                    new Enclosure { Animals = new List<Animal>
+                    {
+                        new Lion(),
+                        new Lion()
+                    } }
+                },
+                Employees = new List<IEmployee>
+                {
+                    new ZooKeeper { AnimalExperiences = new List<string> { "Bison", "Lion" } },
+                    new ZooKeeper { AnimalExperiences = new List<string> { "Elephant" } }
+                }
+            } };
+        }
+
+        private static IEnumerable<object[]> GenerateZooForNotFeedAnimals()
+        {
+            yield return new object[] { new Zoo
+            {
+                Enclosures = new List<Enclosure>
+                {
+                    new Enclosure { Animals = new List<Animal>
+                    {
+                        new Bison(),
+                        new Elephant()
+                    } },
+                    new Enclosure { Animals = new List<Animal>
+                    {
+                        new Lion(),
+                        new Lion()
+                    } }
+                },
+                Employees = new List<IEmployee>
+                {
+                    new ZooKeeper { AnimalExperiences = new List<string> { "Parrot", "Penguin" } },
+                    new ZooKeeper { AnimalExperiences = new List<string> { "Snake" } }
+                }
+            } };
         }
     }
 }
