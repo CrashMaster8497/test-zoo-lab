@@ -2,6 +2,8 @@
 using ZooLibrary.Animals.Birds;
 using ZooLibrary.Animals.Mammals;
 using ZooLibrary.Animals.Reptiles;
+using ZooLibrary.Employees;
+using ZooLibrary.Medicine;
 
 namespace ZooLibrary.Tests.Animals.Mammals
 {
@@ -47,7 +49,8 @@ namespace ZooLibrary.Tests.Animals.Mammals
         {
             var bison = new Bison();
 
-            var zooKeeper = new Employees.ZooKeeper();
+            var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(bison);
             zooKeeper.FeedAnimal(bison);
 
             Assert.True(bison.FeedTimes.Count == 1);
@@ -59,7 +62,8 @@ namespace ZooLibrary.Tests.Animals.Mammals
         {
             var bison = new Bison();
 
-            var zooKeeper = new Employees.ZooKeeper();
+            var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(bison);
             zooKeeper.FeedAnimal(bison);
             zooKeeper.FeedAnimal(bison);
             zooKeeper.FeedAnimal(bison);
@@ -83,7 +87,7 @@ namespace ZooLibrary.Tests.Animals.Mammals
         {
             var bison = new Bison() { IsSick = true };
 
-            bison.Heal(new ZooLibrary.Medicine.Antibiotics());
+            bison.Heal(new Antibiotics());
 
             Assert.False(bison.IsSick);
         }
