@@ -5,9 +5,12 @@ namespace ZooApp.Tests
     public class ZooAppTest
     {
         [Fact]
-        public void ShouldBeAbleToRunMain()
+        public void ShouldBeAbleToAddZoo()
         {
-            ZooApp.Main(Array.Empty<string>());
+            var zooApp = new ZooApp();
+
+            var zoo = new Zoo();
+            zooApp.AddZoo(zoo);
         }
 
         [Fact]
@@ -18,12 +21,9 @@ namespace ZooApp.Tests
         }
 
         [Fact]
-        public void ShouldBeAbleToAddZoo()
+        public void ShouldBeAbleToRunMain()
         {
-            var zooApp = new ZooApp();
-
-            var zoo = new Zoo();
-            zooApp.AddZoo(zoo);
+            ZooApp.Main(Array.Empty<string>());
         }
     }
 }
