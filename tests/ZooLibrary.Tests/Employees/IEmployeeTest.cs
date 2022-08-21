@@ -16,7 +16,7 @@ namespace ZooLibrary.Tests.Employees
         private static IEnumerable<object[]> GenerateEmployees()
         {
             yield return new object[] { new ZooKeeper() };
-            //yield return new object[] { new Veterinarian() };
+            yield return new object[] { new Veterinarian() };
         }
     }
 }
