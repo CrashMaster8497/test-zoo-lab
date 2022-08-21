@@ -50,6 +50,7 @@ namespace ZooLibrary.Tests.Animals.Birds
             var parrot = new Parrot();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(parrot);
             zooKeeper.FeedAnimal(parrot);
 
             Assert.True(parrot.FeedTimes.Count == 1);
@@ -62,6 +63,7 @@ namespace ZooLibrary.Tests.Animals.Birds
             var parrot = new Parrot();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(parrot);
             zooKeeper.FeedAnimal(parrot);
             zooKeeper.FeedAnimal(parrot);
             zooKeeper.FeedAnimal(parrot);

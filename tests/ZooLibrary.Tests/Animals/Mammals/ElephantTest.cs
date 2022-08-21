@@ -50,6 +50,7 @@ namespace ZooLibrary.Tests.Animals.Mammals
             var elephant = new Elephant();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(elephant);
             zooKeeper.FeedAnimal(elephant);
 
             Assert.True(elephant.FeedTimes.Count == 1);
@@ -62,6 +63,7 @@ namespace ZooLibrary.Tests.Animals.Mammals
             var elephant = new Elephant();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(elephant);
             zooKeeper.FeedAnimal(elephant);
             zooKeeper.FeedAnimal(elephant);
             zooKeeper.FeedAnimal(elephant);

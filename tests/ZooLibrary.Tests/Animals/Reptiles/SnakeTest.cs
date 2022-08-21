@@ -50,6 +50,7 @@ namespace ZooLibrary.Tests.Animals.Reptiles
             var snake = new Snake();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(snake);
             zooKeeper.FeedAnimal(snake);
 
             Assert.True(snake.FeedTimes.Count == 1);
@@ -62,6 +63,7 @@ namespace ZooLibrary.Tests.Animals.Reptiles
             var snake = new Snake();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(snake);
             zooKeeper.FeedAnimal(snake);
             zooKeeper.FeedAnimal(snake);
             zooKeeper.FeedAnimal(snake);

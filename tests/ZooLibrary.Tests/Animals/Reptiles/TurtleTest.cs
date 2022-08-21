@@ -50,6 +50,7 @@ namespace ZooLibrary.Tests.Animals.Reptiles
             var turtle = new Turtle();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(turtle);
             zooKeeper.FeedAnimal(turtle);
 
             Assert.True(turtle.FeedTimes.Count == 1);
@@ -62,6 +63,7 @@ namespace ZooLibrary.Tests.Animals.Reptiles
             var turtle = new Turtle();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(turtle);
             zooKeeper.FeedAnimal(turtle);
             zooKeeper.FeedAnimal(turtle);
             zooKeeper.FeedAnimal(turtle);

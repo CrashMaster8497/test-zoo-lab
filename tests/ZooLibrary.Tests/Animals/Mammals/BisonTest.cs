@@ -50,6 +50,7 @@ namespace ZooLibrary.Tests.Animals.Mammals
             var bison = new Bison();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(bison);
             zooKeeper.FeedAnimal(bison);
 
             Assert.True(bison.FeedTimes.Count == 1);
@@ -62,6 +63,7 @@ namespace ZooLibrary.Tests.Animals.Mammals
             var bison = new Bison();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(bison);
             zooKeeper.FeedAnimal(bison);
             zooKeeper.FeedAnimal(bison);
             zooKeeper.FeedAnimal(bison);

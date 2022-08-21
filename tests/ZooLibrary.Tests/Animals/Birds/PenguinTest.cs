@@ -50,6 +50,7 @@ namespace ZooLibrary.Tests.Animals.Birds
             var penguin = new Penguin();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(penguin);
             zooKeeper.FeedAnimal(penguin);
 
             Assert.True(penguin.FeedTimes.Count == 1);
@@ -62,6 +63,7 @@ namespace ZooLibrary.Tests.Animals.Birds
             var penguin = new Penguin();
 
             var zooKeeper = new ZooKeeper();
+            zooKeeper.AddAnimalExperience(penguin);
             zooKeeper.FeedAnimal(penguin);
             zooKeeper.FeedAnimal(penguin);
             zooKeeper.FeedAnimal(penguin);
