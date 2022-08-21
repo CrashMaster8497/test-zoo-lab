@@ -65,14 +65,23 @@ namespace ZooLibrary.Tests
                 animal.GetType().Name), exception.Message);
         }
 
-        /*
         [Theory]
         [MemberData(nameof(GenerateZooAndSuitableEmployee))]
         public void ShouldBeAbleToHireEmployee(Zoo zoo, IEmployee employee)
         {
+            zoo.HireEmployee(employee);
 
+            Assert.Contains(employee, zoo.Employees);
         }
-        */
+
+        [Theory]
+        [MemberData(nameof(GenerateZooAndNotSuitableEmployee))]
+        public void ShouldThrowNoNeededExperienceException(Zoo zoo, IEmployee employee)
+        {
+            var exception = Assert.Throws<NoNeededExperienceException>(() => zoo.HireEmployee(employee));
+            Assert.Equal(string.Format("Can't hire an employee ({0} {1}) without suitable experiences",
+                employee.FirstName, employee.LastName), exception.Message);
+        }
 
         private static IEnumerable<object[]> GenerateZooWithAvailableEnclosure()
         {
@@ -138,7 +147,7 @@ namespace ZooLibrary.Tests
         {
             yield return new object[]
             {
-                new Zoo { Enclosures = new List<Enclosure>() },
+                new Zoo(),
                 new Bison()
             };
             yield return new object[]
@@ -186,7 +195,6 @@ namespace ZooLibrary.Tests
             };
         }
 
-        /*
         private static IEnumerable<object[]> GenerateZooAndSuitableEmployee()
         {
             yield return new object[]
@@ -206,7 +214,94 @@ namespace ZooLibrary.Tests
                     AnimalExperiences = { "Bison" }
                 }
             };
+            yield return new object[]
+            {
+                new Zoo()
+                {
+                    Enclosures = new List<Enclosure>
+                    {
+                        new Enclosure
+                        {
+                            Animals = { new Bison() }
+                        }
+                    }
+                },
+                new Veterinarian()
+                {
+                    AnimalExperiences = { "Bison" }
+                }
+            };
+            yield return new object[]
+            {
+                new Zoo()
+                {
+                    Enclosures = new List<Enclosure>
+                    {
+                        new Enclosure
+                        {
+                            Animals = { new Elephant() }
+                        },
+                        new Enclosure
+                        {
+                            Animals = { new Lion() }
+                        }
+                    }
+                },
+                new ZooKeeper
+                {
+                    AnimalExperiences = { "Bison", "Lion" }
+                }
+            };
         }
-        */
+
+        private static IEnumerable<object[]> GenerateZooAndNotSuitableEmployee()
+        {
+            yield return new object[]
+            {
+                new Zoo(),
+                new ZooKeeper
+                {
+                    AnimalExperiences = { "Bison" }
+                }
+            };
+            yield return new object[]
+            {
+                new Zoo()
+                {
+                    Enclosures = new List<Enclosure>
+                    {
+                        new Enclosure
+                        {
+                            Animals = { new Bison() }
+                        }
+                    }
+                },
+                new Veterinarian()
+                {
+                    AnimalExperiences = { "Elephant" }
+                }
+            };
+            yield return new object[]
+            {
+                new Zoo()
+                {
+                    Enclosures = new List<Enclosure>
+                    {
+                        new Enclosure
+                        {
+                            Animals = { new Elephant() }
+                        },
+                        new Enclosure
+                        {
+                            Animals = { new Lion(), new Lion() }
+                        }
+                    }
+                },
+                new ZooKeeper
+                {
+                    AnimalExperiences = { "Bison", "Parrot" }
+                }
+            };
+        }
     }
 }

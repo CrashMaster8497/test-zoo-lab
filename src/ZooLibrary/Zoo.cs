@@ -37,7 +37,7 @@ namespace ZooLibrary
             {
                 int sqFtLeft = enclosure.SquareFeet;
                 Animal? notFriendlyAnimal = null;
-                foreach (Animal animal in enclosure.Animals)
+                foreach (var animal in enclosure.Animals)
                 {
                     sqFtLeft -= animal.RequiredSpaceSqFt;
                     if (!newAnimal.IsFriendlyWith(animal) || !animal.IsFriendlyWith(newAnimal))
@@ -60,6 +60,41 @@ namespace ZooLibrary
             }
 
             return availableEnclosure;
+        }
+
+        public void HireEmployee(IEmployee employee)
+        {
+            bool isSuitable = false;
+            foreach (var enclosure in Enclosures)
+            {
+                foreach (var animal in enclosure.Animals)
+                {
+                    if (employee is ZooKeeper zooKeeper)
+                    {
+                        if (zooKeeper.HasAnimalExperience(animal))
+                        {
+                            isSuitable = true;
+                        }
+                    }
+                    if (employee is Veterinarian veterinarian)
+                    {
+                        if (veterinarian.HasAnimalExperience(animal))
+                        {
+                            isSuitable = true;
+                        }
+                    }
+                }
+            }
+
+            if (!isSuitable)
+            {
+                throw new NoNeededExperienceException(string.Format(
+                    "Can't hire an employee ({0} {1}) without suitable experiences",
+                    employee.FirstName,
+                    employee.LastName));
+            }
+
+            Employees.Add(employee);
         }
     }
 }
