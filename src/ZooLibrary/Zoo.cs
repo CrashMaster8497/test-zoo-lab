@@ -141,5 +141,50 @@ namespace ZooLibrary
                 }
             }
         }
+
+        public void HealAnimals()
+        {
+            var animalDictionary = new Dictionary<string, List<Animal>>();
+            foreach (var enclosure in Enclosures)
+            {
+                foreach (var animal in enclosure.Animals)
+                {
+                    if (!animalDictionary.ContainsKey(animal.GetType().Name))
+                    {
+                        animalDictionary.Add(animal.GetType().Name, new List<Animal>());
+                    }
+                    animalDictionary[animal.GetType().Name].Add(animal);
+                }
+            }
+
+            var veterinarianDictionary = new Dictionary<string, List<Veterinarian>>();
+            foreach (var employee in Employees)
+            {
+                if (employee is Veterinarian veterinarian)
+                {
+                    foreach (var animalType in veterinarian.AnimalExperiences)
+                    {
+                        if (!veterinarianDictionary.ContainsKey(animalType))
+                        {
+                            veterinarianDictionary.Add(animalType, new List<Veterinarian>());
+                        }
+                        veterinarianDictionary[animalType].Add(veterinarian);
+                    }
+                }
+            }
+
+            var random = Random.Shared;
+            foreach (var animalType in animalDictionary.Keys)
+            {
+                foreach (var animal in animalDictionary[animalType])
+                {
+                    if (veterinarianDictionary.ContainsKey(animalType))
+                    {
+                        var veterinarian = veterinarianDictionary[animalType][random.Next(veterinarianDictionary[animalType].Count)];
+                        veterinarian.HealAnimal(animal);
+                    }
+                }
+            }
+        }
     }
 }

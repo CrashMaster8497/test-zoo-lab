@@ -113,6 +113,36 @@ namespace ZooLibrary.Tests
             }
         }
 
+        [Theory]
+        [MemberData(nameof(GenerateZooForHealAnimals))]
+        public void ShouldBeAbleToHealAnimals(Zoo zoo)
+        {
+            zoo.HealAnimals();
+
+            foreach (var enclosure in zoo.Enclosures)
+            {
+                foreach (var animal in enclosure.Animals)
+                {
+                    Assert.False(animal.IsSick);
+                }
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(GenerateZooForNotHealAnimals))]
+        public void ShouldNotBeAbleToHealAnimals(Zoo zoo)
+        {
+            zoo.HealAnimals();
+
+            foreach (var enclosure in zoo.Enclosures)
+            {
+                foreach (var animal in enclosure.Animals)
+                {
+                    Assert.True(animal.IsSick);
+                }
+            }
+        }
+
         private static IEnumerable<object[]> GenerateZooWithAvailableEnclosure()
         {
             yield return new object[]
@@ -380,6 +410,56 @@ namespace ZooLibrary.Tests
                 {
                     new ZooKeeper { AnimalExperiences = new List<string> { "Parrot", "Penguin" } },
                     new ZooKeeper { AnimalExperiences = new List<string> { "Snake" } }
+                }
+            } };
+        }
+
+        private static IEnumerable<object[]> GenerateZooForHealAnimals()
+        {
+            yield return new object[] { new Zoo
+            {
+                Enclosures = new List<Enclosure>
+                {
+                    new Enclosure { Animals = new List<Animal>
+                    {
+                        new Bison { IsSick = true },
+                        new Elephant { IsSick = true }
+                    } },
+                    new Enclosure { Animals = new List<Animal>
+                    {
+                        new Lion { IsSick = true },
+                        new Lion { IsSick = true }
+                    } }
+                },
+                Employees = new List<IEmployee>
+                {
+                    new Veterinarian { AnimalExperiences = new List<string> { "Bison", "Lion" } },
+                    new Veterinarian { AnimalExperiences = new List<string> { "Elephant" } }
+                }
+            } };
+        }
+
+        private static IEnumerable<object[]> GenerateZooForNotHealAnimals()
+        {
+            yield return new object[] { new Zoo
+            {
+                Enclosures = new List<Enclosure>
+                {
+                    new Enclosure { Animals = new List<Animal>
+                    {
+                        new Bison { IsSick = true },
+                        new Elephant { IsSick = true }
+                    } },
+                    new Enclosure { Animals = new List<Animal>
+                    {
+                        new Lion { IsSick = true },
+                        new Lion { IsSick = true }
+                    } }
+                },
+                Employees = new List<IEmployee>
+                {
+                    new Veterinarian { AnimalExperiences = new List<string> { "Parrot", "Penguin" } },
+                    new Veterinarian { AnimalExperiences = new List<string> { "Snake" } }
                 }
             } };
         }
